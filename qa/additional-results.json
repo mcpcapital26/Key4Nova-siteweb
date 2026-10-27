@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "Language selector: Enter, Escape, outside click",
+    "Reduced motion: no client animation",
+    "Mobile navigation accessible without JavaScript"
+  ],
+  "errors": []
+}

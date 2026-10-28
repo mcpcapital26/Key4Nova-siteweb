@@ -5,6 +5,10 @@ root = Path(__file__).resolve().parents[1]
 files = ['styles.css', 'refinements.css', 'site.js', 'navigation.js', 'job-feed.js', 'apply-form.js']
 versions = {name: hashlib.sha256((root/name).read_bytes().replace(b'\r\n', b'\n')).hexdigest()[:12] for name in files}
 pages = {}
+not_found = (root/'404.html').read_text()
+for name, version in versions.items():
+    not_found = re.sub(r'((?:href|src)="/' + re.escape(name) + r')(?:\?[^" ]*)?"', lambda m: m[1] + '?v=' + version + '"', not_found)
+(root/'404.html').write_text(not_found)
 for path in sorted(root.rglob('index.html')):
     if any(part.startswith('.') for part in path.relative_to(root).parts):
         continue

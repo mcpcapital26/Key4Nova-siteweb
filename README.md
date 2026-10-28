@@ -20,10 +20,14 @@ Puis ouvrir http://localhost:8000. L’hébergement final doit servir les fichie
 
 Ouvrir un `index.html` directement depuis le disque ne fonctionne pas, pour la même raison : utiliser le serveur local ci-dessus ou `preview.html`.
 
+`404.html` est la page « introuvable » que GitHub Pages affiche pour toute adresse absente. Elle renvoie aussi les adresses de l’ancien site key4nova.com (Webflow : `/fr/privacy-policy`, `/fr/jobs/…`, `/about`, …) vers leur nouvelle page. Les conditions générales de l’ancien site (`/fr/terms`) n’ont pas d’équivalent.
+
 ## Organisation
 
-- `index.html`, `entreprises/`, `offres/`, `flex/`, `insights/`, `a-propos/` : pages françaises.
-- `en/`, `nl/` : pages équivalentes anglaises et néerlandaises.
+- `index.html`, `entreprises/`, `offres/`, `flex/`, `insights/`, `a-propos/`, `confidentialite/` : pages françaises.
+- `en/`, `nl/` : pages équivalentes anglaises et néerlandaises (`en/privacy/`, `nl/privacy/` pour la confidentialité).
+- `confidentialite/`, `nl/privacy/`, `en/privacy/` : politique de confidentialité reprise mot pour mot de l’ancien site. À mettre à jour par Key4Nova : elle décrit une bannière de cookies que le nouveau site n’a pas, cite « Page » (reste d’un modèle) et ne couvre pas les candidatures envoyées par le formulaire.
+- `404.html` : page introuvable et redirections de l’ancien site (voir « Publication »).
 - `assets/` : logo, photos et illustrations extraits sans modification.
 - `styles.css` : styles de la présentation d’origine.
 - `refinements.css` : finitions communes et adaptations responsive.

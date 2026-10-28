@@ -3,7 +3,7 @@ const fs=require('node:fs');
 (async()=>{
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
  const page=await browser.newPage();let errors=[];page.on('pageerror',e=>errors.push(e.message));
- const routes=['/','/entreprises/','/offres/','/insights/','/a-propos/','/flex/','/en/','/en/companies/','/en/careers/','/en/insights/','/en/about/','/en/flex/','/nl/','/nl/bedrijven/','/nl/vacatures/','/nl/insights/','/nl/over-ons/','/nl/flex/'];
+ const routes=['/','/entreprises/','/offres/','/insights/','/a-propos/','/flex/','/en/','/en/companies/','/en/careers/','/en/insights/','/en/about/','/en/flex/','/nl/','/nl/bedrijven/','/nl/vacatures/','/nl/insights/','/nl/over-ons/','/nl/flex/','/confidentialite/','/nl/privacy/','/en/privacy/'];
  const loadImages=async()=>{await page.locator('img').evaluateAll(imgs=>imgs.forEach(img=>img.loading='eager'));await page.evaluate(()=>Promise.all([...document.images].map(img=>img.decode().catch(()=>{}))));};
  let checks=0;
  for(const width of [320,375,768,1024,1440]){

@@ -28,7 +28,6 @@
       remark: 'Remarque', remarkHint: 'Facultatif.',
       consentBefore: 'J’accepte que Key4Nova traite mes données pour cette candidature, conformément à sa ',
       consentLink: 'politique de confidentialité', consentAfter: '.',
-      privacy: 'https://www.key4nova.com/fr/privacy-policy',
       required: 'obligatoire', send: 'Envoyer ma candidature', sending: 'Envoi en cours…',
       cancel: 'Annuler', close: 'Fermer',
       doneTitle: 'Merci !', done: 'Votre candidature a bien été envoyée. Un consultant de Key4Nova vous recontacte rapidement.',
@@ -52,7 +51,6 @@
       remark: 'Opmerking', remarkHint: 'Optioneel.',
       consentBefore: 'Ik ga ermee akkoord dat Key4Nova mijn gegevens voor deze sollicitatie verwerkt, volgens het ',
       consentLink: 'privacybeleid', consentAfter: '.',
-      privacy: 'https://www.key4nova.com/nl/privacy-policy',
       required: 'verplicht', send: 'Sollicitatie versturen', sending: 'Bezig met versturen…',
       cancel: 'Annuleren', close: 'Sluiten',
       doneTitle: 'Bedankt!', done: 'Uw sollicitatie is verstuurd. Een consultant van Key4Nova neemt snel contact met u op.',
@@ -76,7 +74,6 @@
       remark: 'Remark', remarkHint: 'Optional.',
       consentBefore: 'I agree that Key4Nova processes my data for this application, in line with its ',
       consentLink: 'privacy policy', consentAfter: '.',
-      privacy: 'https://www.key4nova.com/fr/privacy-policy',
       required: 'required', send: 'Send my application', sending: 'Sending…',
       cancel: 'Cancel', close: 'Close',
       doneTitle: 'Thank you!', done: 'Your application has been sent. A Key4Nova consultant will be in touch shortly.',
@@ -193,11 +190,17 @@
     consent.appendChild(inputs.consent);
     var consentText = el('span');
     consentText.appendChild(document.createTextNode(words.consentBefore));
-    var privacy = el('a', '', words.consentLink);
-    privacy.href = words.privacy;
-    privacy.target = '_blank';
-    privacy.rel = 'noopener noreferrer';
-    consentText.appendChild(privacy);
+    // The page's own privacy link (footer), so it is right wherever the site is hosted.
+    var policy = document.querySelector('a[data-privacy]');
+    if (policy) {
+      var privacy = el('a', '', words.consentLink);
+      privacy.href = policy.href;
+      privacy.target = '_blank';
+      privacy.rel = 'noopener';
+      consentText.appendChild(privacy);
+    } else {
+      consentText.appendChild(document.createTextNode(words.consentLink));
+    }
     consentText.appendChild(document.createTextNode(words.consentAfter + ' *'));
     consent.appendChild(consentText);
     form.appendChild(consent);

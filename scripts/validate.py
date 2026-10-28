@@ -43,7 +43,7 @@ for route,p in pages.items():
  for lang,target in p.alternates.items():
   if target not in pages:errors.append(f'{route}: unavailable alternate {target}')
   elif lang!='x-default' and pages[target].lang!=lang:errors.append(f'{route}: wrong alternate language')
-assert len(pages)==18, len(pages)
+assert len(pages)==21, len(pages)
 if errors:
  print('\n'.join(errors));raise SystemExit(1)
 print(f'PASS: {len(pages)} pages; internal links, anchors, resources, headings, metadata, image alternatives and language equivalents.')

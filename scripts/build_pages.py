@@ -15,7 +15,8 @@ out.mkdir(parents=True)
 for name in public:
     (shutil.copytree if (root/name).is_dir() else shutil.copy2)(root/name, out/name)
 pages = 0
-for path in sorted(root.rglob('index.html')):
+# 404.html: GitHub Pages shows it for any missing address (and redirects the old site's ones).
+for path in [*sorted(root.rglob('index.html')), root/'404.html']:
     rel = path.relative_to(root)
     if out in path.parents or any(part.startswith(('.', '_')) for part in rel.parts):
         continue

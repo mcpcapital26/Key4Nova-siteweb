@@ -210,3 +210,6 @@
 .job-demo-note{border-left:3px solid var(--blue);background:#e9f2ff;padding:14px 19px;margin:0 0 22px;color:#263c5e;font-size:.94rem}.job-demo-note strong{display:block;margin-bottom:3px}.job-demo-note p{margin:0}.offer-company{font-size:.88rem;color:#526178;font-weight:700;margin:-3px 0 11px}.offer-card h3{line-height:1.22}.offer-card .text-link:focus-visible{outline:3px solid #8fb9ff;outline-offset:4px}
 @media(max-width:760px){.careers-hero{padding:38px 0 42px}.careers-hero .breadcrumb{margin-bottom:21px}.careers-hero+.offers-section{padding-top:52px}.job-filters{grid-template-columns:1fr 1fr}.job-filters label:first-child{grid-column:1/-1}}
 @media(max-width:480px){.job-filters{grid-template-columns:1fr}.job-filters label:first-child{grid-column:auto}.client-wordmark span{font-size:1.16rem}}
+/* Live CRM offers (job-feed.js): hidden while loading, so the static "no offers" message does not flash; the full text replaces the excerpt when opened. */
+.offers-grid[aria-busy=true]>*{visibility:hidden}.offers-grid .offers-empty{grid-column:1/-1}.offer-excerpt{white-space:pre-line}
+.offer-full summary{cursor:pointer;color:#205fc9;font-weight:650;margin-bottom:14px}.offer-full .offer-body{font-size:inherit;line-height:inherit;white-space:pre-line;margin:0 0 20px}.offer-card:has(.offer-full[open]) .offer-excerpt{display:none}

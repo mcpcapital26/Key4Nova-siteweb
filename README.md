@@ -23,6 +23,15 @@ Puis ouvrir http://localhost:8000. L’hébergement final doit servir les fichie
 - `refinements.css` : finitions communes et adaptations responsive.
 - `site.js` : menu mobile et filtres d’offres d’origine.
 - `navigation.js` : fermeture des menus, Échap, gestion du focus et libellés traduits.
+- `job-feed.js` : offres en direct depuis le CRM Key4Nova sur les pages carrières (voir ci-dessous).
+
+## Offres d’emploi
+
+Les pages `/offres/`, `/nl/vacatures/` et `/en/careers/` chargent dans le navigateur les offres qu’un recruteur a publiées dans le CRM (vue Supabase `public_job_offers`, offres ouvertes uniquement, les plus récentes d’abord). Aucun redéploiement n’est nécessaire pour qu’une nouvelle offre apparaisse. Le client n’est jamais affiché (« Via Key4Nova ») et la candidature se fait par e-mail à info@key4nova.com avec la référence de l’offre.
+
+Sans offre publiée, si le flux est injoignable ou si JavaScript est désactivé, la page affiche son message statique « aucune offre pour le moment » avec un lien de candidature spontanée.
+
+La clé `sb_publishable_…` de `job-feed.js` est publique par conception et ne lit que ce flux. Ne jamais ajouter au dépôt une autre clé Supabase (`sb_secret_…`, `service_role`), une URL de base de données ou un mot de passe. Le contenu du flux est affiché avec `textContent`, jamais `innerHTML`.
 
 ## Vérification et export
 
@@ -39,7 +48,7 @@ L’export régénère `preview.html` et les empreintes de cache des CSS et JS d
 
 - Validation humaine du rendu sur appareils réels. Les 18 pages ont passé les contrôles Chromium de débordement aux largeurs 320, 375, 768, 1024 et 1440 px ; voir `qa/VALIDATION.md`.
 - Relecture humaine des traductions et des contenus commerciaux.
-- Les annonces sont les exemples présents dans la source : leur disponibilité doit être vérifiée sur les liens d’origine. Aucun système de candidature serveur n’est inclus dans le fichier fourni.
+- Aucun système de candidature serveur n’est inclus : les candidatures aux offres du CRM passent par e-mail.
 - Liens externes, destinataires des e-mails et politique de confidentialité sur le site d’origine.
 - Domaine final pour ajouter des URL canoniques et des `hreflang` absolus. Les équivalences actuelles utilisent les chemins du site.
 - Mesures de performance et d’accessibilité sur l’hébergement final.

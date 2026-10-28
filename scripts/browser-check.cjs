@@ -16,13 +16,21 @@ const fs=require('node:fs');
    checks++;
   }
  }
+ // Offers are live from the CRM (job-feed.js); with none published, only the "no offers" message shows.
  for(const route of ['/offres/','/en/careers/','/nl/vacatures/']){
   await page.goto('http://127.0.0.1:8000'+route);
+  await page.waitForFunction(()=>!document.querySelector('#job-list[aria-busy]'),null,{timeout:10000});
+  const total=await page.locator('[data-job-card]').count();
+  if(!total){
+   if(!await page.locator('.offers-empty').isVisible())errors.push(`No-offers message ${route}`);
+   if(await page.locator('[data-job-filters]').isVisible())errors.push(`Filters without offers ${route}`);
+   continue;
+  }
   await page.locator('[data-job-search]').fill('zzzz-no-result');
   if(await page.locator('[data-job-card]:visible').count()!==0)errors.push(`Filter ${route}`);
   if(!await page.locator('[data-filter-empty]').isVisible())errors.push(`Empty ${route}`);
   await page.locator('[data-job-search]').fill('');
-  if(await page.locator('[data-job-card]:visible').count()!==8)errors.push(`Reset ${route}`);
+  if(await page.locator('[data-job-card]:visible').count()!==total)errors.push(`Reset ${route}`);
  }
  await page.goto('http://127.0.0.1:8000/entreprises/');await page.locator('.language-menu summary').click();await page.locator('.language-options a[lang=en]').click();if(!page.url().endsWith('/en/companies/'))errors.push('Equivalent language route');
  await page.goto('http://127.0.0.1:8000/');await page.setViewportSize({width:1440,height:1000});await loadImages();await page.screenshot({path:'qa/home-desktop.png',fullPage:true});await page.setViewportSize({width:375,height:850});await loadImages();await page.screenshot({path:'qa/home-mobile.png',fullPage:true});

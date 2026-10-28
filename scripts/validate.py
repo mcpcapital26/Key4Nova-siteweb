@@ -21,7 +21,7 @@ class Page(HTMLParser):
   if tag=='link' and 'hreflang' in a:self.alternates[a['hreflang']]=a.get('href')
 pages={}
 for p in root.rglob('index.html'):
- route='/' + str(p.parent.relative_to(root)).strip('.')
+ route='/' + p.parent.relative_to(root).as_posix().strip('.')
  route=route.rstrip('/')+'/' if route!='/' else route
  pages[route]=Page(p.read_text())
 errors=[]

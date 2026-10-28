@@ -8,7 +8,7 @@ import re, shutil, sys
 root = Path(__file__).resolve().parents[1]
 out = Path(sys.argv[1]).resolve()
 base = (sys.argv[2] if len(sys.argv) > 2 else '').rstrip('/')
-public = ['assets', 'styles.css', 'refinements.css', 'site.js', 'navigation.js', 'job-feed.js']
+public = ['assets', 'styles.css', 'refinements.css', 'site.js', 'navigation.js', 'job-feed.js', 'apply-form.js']
 if out.exists():
     shutil.rmtree(out)
 out.mkdir(parents=True)

@@ -30,10 +30,13 @@ Ouvrir un `index.html` directement depuis le disque ne fonctionne pas, pour la m
 - `site.js` : menu mobile et filtres d’offres d’origine.
 - `navigation.js` : fermeture des menus, Échap, gestion du focus et libellés traduits.
 - `job-feed.js` : offres en direct depuis le CRM Key4Nova sur les pages carrières (voir ci-dessous).
+- `apply-form.js` : formulaire de candidature des pages carrières (voir ci-dessous).
 
 ## Offres d’emploi
 
-Les pages `/offres/`, `/nl/vacatures/` et `/en/careers/` chargent dans le navigateur les offres qu’un recruteur a publiées dans le CRM (vue Supabase `public_job_offers`, offres ouvertes uniquement, les plus récentes d’abord). Aucun redéploiement n’est nécessaire pour qu’une nouvelle offre apparaisse. Le client n’est jamais affiché (« Via Key4Nova ») et la candidature se fait par e-mail à info@key4nova.com avec la référence de l’offre.
+Les pages `/offres/`, `/nl/vacatures/` et `/en/careers/` chargent dans le navigateur les offres qu’un recruteur a publiées dans le CRM (vue Supabase `public_job_offers`, offres ouvertes uniquement, les plus récentes d’abord). Aucun redéploiement n’est nécessaire pour qu’une nouvelle offre apparaisse. Le client n’est jamais affiché (« Via Key4Nova »).
+
+« Postuler » et « Candidature spontanée » ouvrent un formulaire (nom, e-mail, téléphone, CV PDF ou Word .docx de 5 Mo au plus, remarque, consentement). Il est envoyé à la fonction Supabase `website-application` (dépôt du CRM, `supabase/functions/`), qui revérifie tout, enregistre la candidature dans le CRM et prévient le recruteur du poste par Outlook. Les contrôles du navigateur ne servent qu’au confort du candidat. Si l’envoi échoue, le formulaire propose l’e-mail ; sans JavaScript, les liens restent des `mailto:` vers info@key4nova.com.
 
 Sans offre publiée, si le flux est injoignable ou si JavaScript est désactivé, la page affiche son message statique « aucune offre pour le moment » avec un lien de candidature spontanée.
 

@@ -94,6 +94,10 @@
     var apply = el('a', 'text-link', words.apply + ' ');
     apply.href = 'mailto:info@key4nova.com?subject=' +
       encodeURIComponent(words.subject + ' – ' + offer.title + ' (' + words.ref + ' ' + offer.id + ')');
+    // apply-form.js opens its form for this link; the mailto stays as the fallback.
+    apply.setAttribute('data-apply', '');
+    apply.setAttribute('data-apply-job', String(offer.id));
+    apply.setAttribute('data-apply-title', offer.title);
     var arrow = el('span', '', '↗');
     arrow.setAttribute('aria-hidden', 'true');
     apply.appendChild(arrow);

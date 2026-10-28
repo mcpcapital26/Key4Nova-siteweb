@@ -39,25 +39,11 @@
  window.matchMedia('(min-width:1241px)').addEventListener('change', () => closeNav());
 })();
 
-// The client ribbon can be paused independently of pointer hover.
-for (const button of document.querySelectorAll('[data-client-pause]')) {
- const ribbon = button.closest('.client-strip').querySelector('.client-marquee');
+// Maintain a constant scrolling speed as the logo ribbon resizes.
+for (const ribbon of document.querySelectorAll('.client-marquee')) {
  const track = ribbon.querySelector('.client-track');
  const group = track.querySelector('.client-group');
  const setSpeed = () => track.style.setProperty('--client-duration', `${(group.getBoundingClientRect().width / 42).toFixed(2)}s`);
  setSpeed();
  if ('ResizeObserver' in window) new ResizeObserver(setSpeed).observe(group);
- const labels = {
-  fr: ['Mettre le défilement en pause', 'Reprendre le défilement'],
-  en: ['Pause client scrolling', 'Resume client scrolling'],
-  nl: ['Scrollen pauzeren', 'Scrollen hervatten']
- }[document.documentElement.lang] || ['Pause client scrolling', 'Resume client scrolling'];
- button.hidden = false;
- button.addEventListener('click', () => {
-  const paused = !ribbon.hasAttribute('data-paused');
-  ribbon.toggleAttribute('data-paused', paused);
-  button.setAttribute('aria-pressed', String(paused));
-  // Keep a stable accessible toggle label; communicate state with aria-pressed.
-  button.textContent = labels[0];
- });
 }

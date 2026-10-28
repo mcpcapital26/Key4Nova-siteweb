@@ -1,6 +1,6 @@
 # Key4Nova — site corporate multilingue
 
-Site statique restauré depuis la présentation HTML fournie par le propriétaire : 18 pages en français, anglais et néerlandais, 21 ressources graphiques d’origine. Aucune dépendance de production, aucun déploiement automatique.
+Site statique restauré depuis la présentation HTML fournie par le propriétaire : 18 pages en français, anglais et néerlandais, 21 ressources graphiques d’origine. Aucune dépendance de production. Publication automatique sur GitHub Pages à chaque push sur `main` (voir « Publication »).
 
 ## Aperçu
 
@@ -13,6 +13,12 @@ python3 -m http.server 8000
 ```
 
 Puis ouvrir http://localhost:8000. L’hébergement final doit servir les fichiers `index.html` des dossiers, ainsi que les ressources à la racine. Ne pas publier le dossier `scripts/` ni l’aperçu autonome en production.
+
+## Publication
+
+`.github/workflows/pages.yml` publie le site sur GitHub Pages à chaque push sur `main` (réglage requis : Settings → Pages → Build and deployment → Source : GitHub Actions). GitHub Pages sert le dépôt dans un sous-dossier (`https://mcpcapital26.github.io/Key4Nova-siteweb/`) alors que les pages pointent vers la racine (`/styles.css`, `/offres/`) : `scripts/build_pages.py` ajoute ce sous-dossier aux liens et ne publie que les fichiers publics (ni `scripts/`, ni `qa/`, ni `preview.html`, ni ce README). Les fichiers sources ne changent pas. Avec un domaine personnalisé, le sous-dossier est vide et les liens restent tels quels.
+
+Ouvrir un `index.html` directement depuis le disque ne fonctionne pas, pour la même raison : utiliser le serveur local ci-dessus ou `preview.html`.
 
 ## Organisation
 
